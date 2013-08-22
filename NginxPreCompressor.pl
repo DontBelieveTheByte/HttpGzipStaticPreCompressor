@@ -15,7 +15,7 @@ use warnings;
 my @extensions= ("css", "js", "svg", "otf", "ttf", "woff");
 
 #Uncomment to set a hard coded directory.
-my $customDir = '/usr/share/nginx/kbm/web/';
+my $customDir = '/usr/share/nginx/';
 
 #Make sure gzip and touch are available.
 if (!`which touch` || !`which gzip`){
