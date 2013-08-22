@@ -1,4 +1,4 @@
-#Ngninx Gzip Static Pre Compressor
+#Nginx Gzip Static Pre Compressor
 ___
 ## Purpose 
 
