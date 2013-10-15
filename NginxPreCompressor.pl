@@ -71,8 +71,8 @@ foreach my $currentDir (@listOfDirs){
 	foreach my $exts(@extensions){
 		foreach my $file (<*.$exts>){
 			print "Compressing : $file\n";
-			# system("gzip -9 -f -N < $file > $file.gz && touch -r $file $file.gz") == 0 or
-			# die "Compression operation error at : \n" . $fullPathCurrentDir. "$file\n";
+			system("gzip -9 -f -N < $file > $file.gz && touch -r $file $file.gz") == 0 or
+			die "Compression operation error at : \n" . $fullPathCurrentDir. "$file\n";
 		}
 	}
 }
