@@ -35,17 +35,17 @@ my $startDir ;
 #     $startDir = $customDir;
 # }
 if (defined $ARGV[0]){
-	if ($ARGV[0] eq "-h" || $ARGV[0] eq "--help") {
-		die $usage;
-	} else {
-		$startDir = abs_path($ARGV[0]);
-	}
+    if ($ARGV[0] eq "-h" || $ARGV[0] eq "--help") {
+        die $usage;
+    } else {
+        $startDir = abs_path($ARGV[0]);
+    }
 } else {
-	$startDir = abs_path();
+    $startDir = abs_path();
 }
 
 if (!defined $startDir || !-d $startDir) {
-	die "Input directory error.\n"
+    die "Input directory error.\n"
 }
 
 #Remove trailing slash from starting directory if present.
@@ -60,20 +60,20 @@ my @listOfDirs = `find -L ./ -type d`;
 push(@listOfDirs, $startDir);
 
 foreach my $currentDir (@listOfDirs){
-	print "$currentDir\n";
-	my $fullPathCurrentDir;
-	unless ($currentDir ."/	" eq $startDir || $currentDir eq $startDir) {
-		$fullPathCurrentDir = "$startDir". substr ($currentDir,1);
-		print "$fullPathCurrentDir\n";
-		chomp $fullPathCurrentDir;
-		chdir $fullPathCurrentDir or die "Cannot change working directory to : \n$fullPathCurrentDir\n";
-	}
-	foreach my $exts(@extensions){
-		foreach my $file (<*.$exts>){
-			print "Compressing : $file\n";
-			system("gzip -9 -f -N < $file > $file.gz && touch -r $file $file.gz") == 0 or
-			die "Compression operation error at : \n" . $fullPathCurrentDir. "$file\n";
-		}
-	}
+        print "$currentDir\n";
+        my $fullPathCurrentDir;
+        unless ($currentDir ."/	" eq $startDir || $currentDir eq $startDir) {
+            $fullPathCurrentDir = "$startDir". substr ($currentDir,1);
+            print "$fullPathCurrentDir\n";
+            chomp $fullPathCurrentDir;
+            chdir $fullPathCurrentDir or die "Cannot change working directory to : \n$fullPathCurrentDir\n";
+        }
+        foreach my $exts(@extensions){
+            foreach my $file (<*.$exts>){
+            print "Compressing : $file\n";
+            system("gzip -9 -f -N < $file > $file.gz && touch -r $file $file.gz") == 0 or
+            die "Compression operation error at : \n" . $fullPathCurrentDir. "$file\n";
+            }
+        }
 }
 exit(0);
